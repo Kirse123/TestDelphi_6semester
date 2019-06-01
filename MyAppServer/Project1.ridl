@@ -6,7 +6,7 @@
 // However, when applying changes via the Editor this file will be regenerated
 // and comments or formatting changes will be lost.
 // ************************************************************************ //
-// File generated on 31.05.2019 12:41:37 (- $Rev: 12980 $, 319847359).
+// File generated on 01.06.2019 15:31:34 (- $Rev: 12980 $, 416444640).
 
 [
   uuid(73A6D16F-1746-4EB8-9F59-ABE91AC95A7D),
@@ -31,6 +31,28 @@ library Project1
   ]
   interface IMyServer: IAppServer
   {
+    [id(0x0000012D)]
+    HRESULT _stdcall smUpdateClient([in] long ID, [in] BSTR NAME, [in] BSTR ADRESS);
+    [id(0x0000012E)]
+    HRESULT _stdcall smDeleteClient([in] long ID);
+    [id(0x0000012F)]
+    HRESULT _stdcall smUpdateProduct([in] long ID, [in] BSTR NAME, [in] BSTR MG, [in] double VAT);
+    [id(0x00000130)]
+    HRESULT _stdcall smDeleteProdut([in] long ID);
+    [id(0x00000131)]
+    HRESULT _stdcall smUpdateFutura([in] long ID, [in] long ClientID, [in] double TotalSum);
+    [id(0x00000132)]
+    HRESULT _stdcall smDeleteFutura([in] long ID);
+    [id(0x00000133)]
+    HRESULT _stdcall smUpdateFuturaInfo([in] long FuturaID, [in] long ProductID, [in] double Quantity, [in] double Price);
+    [id(0x00000134)]
+    HRESULT _stdcall smDeleteFuturaInfo([in] long FuturaID, [in] long ProductID);
+    [id(0x00000135)]
+    HRESULT _stdcall smSQLClear(void);
+    [id(0x00000136)]
+    HRESULT _stdcall smSQLAddString([in] BSTR str);
+    [id(0x00000137)]
+    HRESULT _stdcall smSQLExecute(void);
   };
 
   [

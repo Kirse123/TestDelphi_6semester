@@ -12,7 +12,7 @@ unit Project1_TLB;
 // ************************************************************************ //
 
 // $Rev: 52393 $
-// File generated on 31.05.2019 12:40:26 from Type Library described below.
+// File generated on 01.06.2019 15:31:33 from Type Library described below.
 
 // ************************************************************************  //
 // Type Lib: E:\General\Документы\GitHub\Delphi\TestDelphi\MyAppServer\Project1 (1)
@@ -22,7 +22,7 @@ unit Project1_TLB;
 // HelpString:
 // DepndLst:
 //   (1) v2.0 stdole, (C:\Windows\SysWOW64\stdole2.tlb)
-//   (2) v1.0 Midas, (E:\Embarcadero\Embarcadero\Studio\20.0\bin64\midas.dll)
+//   (2) v1.0 Midas, (midas.dll)
 // SYS_KIND: SYS_WIN32
 // ************************************************************************ //
 {$TYPEDADDRESS OFF} // Unit must be compiled without type-checked pointers.
@@ -75,6 +75,18 @@ type
 // *********************************************************************//
   IMyServer = interface(IAppServer)
     ['{B984B157-3A4D-49B1-8AE6-62F8F792F8B9}']
+    procedure smUpdateClient(ID: Integer; const NAME: WideString; const ADRESS: WideString); safecall;
+    procedure smDeleteClient(ID: Integer); safecall;
+    procedure smUpdateProduct(ID: Integer; const NAME: WideString; const MG: WideString; VAT: Double); safecall;
+    procedure smDeleteProdut(ID: Integer); safecall;
+    procedure smUpdateFutura(ID: Integer; ClientID: Integer; TotalSum: Double); safecall;
+    procedure smDeleteFutura(ID: Integer); safecall;
+    procedure smUpdateFuturaInfo(FuturaID: Integer; ProductID: Integer; Quantity: Double;
+                                 Price: Double); safecall;
+    procedure smDeleteFuturaInfo(FuturaID: Integer; ProductID: Integer); safecall;
+    procedure smSQLClear; safecall;
+    procedure smSQLAddString(const str: WideString); safecall;
+    procedure smSQLExecute; safecall;
   end;
 
 // *********************************************************************//
@@ -84,6 +96,18 @@ type
 // *********************************************************************//
   IMyServerDisp = dispinterface
     ['{B984B157-3A4D-49B1-8AE6-62F8F792F8B9}']
+    procedure smUpdateClient(ID: Integer; const NAME: WideString; const ADRESS: WideString); dispid 301;
+    procedure smDeleteClient(ID: Integer); dispid 302;
+    procedure smUpdateProduct(ID: Integer; const NAME: WideString; const MG: WideString; VAT: Double); dispid 303;
+    procedure smDeleteProdut(ID: Integer); dispid 304;
+    procedure smUpdateFutura(ID: Integer; ClientID: Integer; TotalSum: Double); dispid 305;
+    procedure smDeleteFutura(ID: Integer); dispid 306;
+    procedure smUpdateFuturaInfo(FuturaID: Integer; ProductID: Integer; Quantity: Double;
+                                 Price: Double); dispid 307;
+    procedure smDeleteFuturaInfo(FuturaID: Integer; ProductID: Integer); dispid 308;
+    procedure smSQLClear; dispid 309;
+    procedure smSQLAddString(const str: WideString); dispid 310;
+    procedure smSQLExecute; dispid 311;
     function AS_ApplyUpdates(const ProviderName: WideString; Delta: OleVariant; MaxErrors: SYSINT;
                              out ErrorCount: SYSINT; var OwnerData: OleVariant): OleVariant; dispid 20000000;
     function AS_GetRecords(const ProviderName: WideString; Count: SYSINT; out RecsOut: SYSINT;
