@@ -41,7 +41,7 @@ type
     procedure smDeleteClient(ID: Integer); safecall;
     procedure smDeleteFutura(ID: Integer); safecall;
     procedure smDeleteFuturaInfo(FuturaID, ProductID: Integer); safecall;
-    procedure smDeleteProdut(ID: Integer); safecall;
+    procedure smDeleteProduct(ID: Integer); safecall;
     procedure smUpdateFutura(ID, ClientID: Integer; TotalSum: Double); safecall;
     procedure smUpdateFuturaInfo(FuturaID, ProductID: Integer; Quantity, Price: Double);
           safecall;
@@ -49,6 +49,7 @@ type
     procedure smSQLAddString(const str: WideString); safecall;
     procedure smSQLClear; safecall;
     procedure smSQLExecute; safecall;
+    procedure smDeleteProdut(ID: Integer); safecall;
 
   public
     { Public declarations }
@@ -111,11 +112,12 @@ begin
     ibspDeleteFuturaInfo.Transaction.Commit;
   ibspDeleteFuturaInfo.Params[0].Value := FuturaID;
   ibspDeleteFuturaInfo.Params[1].Value := ProductID;
+  ibspDeleteFuturaInfo.ExecProc;
   if ibspDeleteFuturaInfo.Transaction.InTransaction then
     ibspDeleteFuturaInfo.Transaction.Commit;
 end;
 
-procedure TMyServer.smDeleteProdut(ID: Integer);
+procedure TMyServer.smDeleteProduct(ID: Integer);
 begin
   if ibspDeleteProduct.Transaction.InTransaction then
     ibspDeleteProduct.Transaction.Commit;
@@ -184,6 +186,11 @@ begin
   IBQuery1.Open;
   if IBQuery1.Transaction.InTransaction then
     IBQuery1.Transaction.Commit;
+end;
+
+procedure TMyServer.smDeleteProdut(ID: Integer);
+begin
+
 end;
 
 initialization

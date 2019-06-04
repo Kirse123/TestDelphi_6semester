@@ -1,5 +1,5 @@
 object MyServer: TMyServer
-  OldCreateOrder = False
+  OldCreateOrder = True
   Height = 399
   Width = 469
   object IBDatabase1: TIBDatabase
@@ -26,7 +26,7 @@ object MyServer: TMyServer
     Transaction = IBTransaction1
     BufferChunks = 1000
     CachedUpdates = False
-    TableName = 'Client'
+    TableName = 'CLIENT'
     UniDirectional = False
     Left = 24
     Top = 80
@@ -36,7 +36,7 @@ object MyServer: TMyServer
     Transaction = IBTransaction1
     BufferChunks = 1000
     CachedUpdates = False
-    TableName = 'Product'
+    TableName = 'PRODUCT'
     UniDirectional = False
     Left = 104
     Top = 80
@@ -46,7 +46,7 @@ object MyServer: TMyServer
     Transaction = IBTransaction1
     BufferChunks = 1000
     CachedUpdates = False
-    TableName = 'Futura'
+    TableName = 'FUTURA'
     UniDirectional = False
     Left = 184
     Top = 80
@@ -56,7 +56,7 @@ object MyServer: TMyServer
     Transaction = IBTransaction1
     BufferChunks = 1000
     CachedUpdates = False
-    TableName = 'FuturaInfo'
+    TableName = 'FUTURAINFO'
     UniDirectional = False
     Left = 256
     Top = 80
@@ -72,6 +72,8 @@ object MyServer: TMyServer
     Top = 80
   end
   object IBQuery1: TIBQuery
+    Database = IBDatabase1
+    Transaction = IBTransaction1
     BufferChunks = 1000
     CachedUpdates = False
     ParamCheck = True
@@ -112,57 +114,84 @@ object MyServer: TMyServer
     Database = IBDatabase1
     Transaction = IBTransaction1
     StoredProcName = 'UpdateClient'
-    Left = 32
+    Left = 40
     Top = 200
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'INID                           '
-        ParamType = ptUnknown
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftWideString
         Name = 'INNAME                         '
-        ParamType = ptUnknown
+        ParamType = ptInput
       end
       item
-        DataType = ftUnknown
+        DataType = ftWideString
         Name = 'INADRESS                       '
-        ParamType = ptUnknown
+        ParamType = ptInput
       end>
   end
   object ibspDeleteClient: TIBStoredProc
     Database = IBDatabase1
     Transaction = IBTransaction1
     StoredProcName = 'DeleteClient'
-    Left = 128
+    Left = 136
     Top = 200
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'INID                           '
-        ParamType = ptUnknown
+        ParamType = ptInput
       end>
   end
   object ibspUpdateProduct: TIBStoredProc
     Database = IBDatabase1
     Transaction = IBTransaction1
     StoredProcName = 'UpdateProduct'
-    Left = 240
+    Left = 248
     Top = 200
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'INID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftWideString
+        Name = 'INNAME'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftWideString
+        Name = 'INMG'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'INVAT'
+        ParamType = ptInput
+      end>
   end
   object ibspDeleteProduct: TIBStoredProc
     Database = IBDatabase1
     Transaction = IBTransaction1
     StoredProcName = 'DeleteProduct'
-    Left = 352
+    Left = 360
     Top = 200
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'INID'
+        ParamType = ptInput
+      end>
   end
   object ibspUpdateFutura: TIBStoredProc
     Database = IBDatabase1
     Transaction = IBTransaction1
     StoredProcName = 'UpdateFutura'
-    Left = 32
+    Left = 40
     Top = 256
     ParamData = <
       item
@@ -185,21 +214,59 @@ object MyServer: TMyServer
     Database = IBDatabase1
     Transaction = IBTransaction1
     StoredProcName = 'DeleteFutura'
-    Left = 128
+    Left = 136
     Top = 256
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'INID'
+        ParamType = ptInput
+      end>
   end
   object ibspUpdateFuturaInfo: TIBStoredProc
     Database = IBDatabase1
     Transaction = IBTransaction1
     StoredProcName = 'UpdateFuturaInfo'
-    Left = 240
+    Left = 248
     Top = 256
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'INFUTURAID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'INPRODUCTID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'INQUANTITY'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'INPRICE'
+        ParamType = ptInput
+      end>
   end
   object ibspDeleteFuturaInfo: TIBStoredProc
     Database = IBDatabase1
     Transaction = IBTransaction1
     StoredProcName = 'DeleteFuturaInfo'
-    Left = 352
+    Left = 360
     Top = 256
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'INFUTURAID'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'INPRODUCTID'
+        ParamType = ptInput
+      end>
   end
 end

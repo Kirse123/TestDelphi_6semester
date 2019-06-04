@@ -12,7 +12,7 @@ unit Project1_TLB;
 // ************************************************************************ //
 
 // $Rev: 52393 $
-// File generated on 01.06.2019 15:31:33 from Type Library described below.
+// File generated on 02.06.2019 12:23:11 from Type Library described below.
 
 // ************************************************************************  //
 // Type Lib: E:\General\Документы\GitHub\Delphi\TestDelphi\MyAppServer\Project1 (1)
@@ -52,7 +52,7 @@ const
   LIBID_Project1: TGUID = '{73A6D16F-1746-4EB8-9F59-ABE91AC95A7D}';
 
   IID_IMyServer: TGUID = '{B984B157-3A4D-49B1-8AE6-62F8F792F8B9}';
-  CLASS_MyServer: TGUID = '{858FC157-C558-4B7C-B6B8-3020998C5779}';
+  CLASS_MyServer: TGUID = '{F59886F2-9963-4365-BA60-53D0D5468134}';
 type
 
 // *********************************************************************//
