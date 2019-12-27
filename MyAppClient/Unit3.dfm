@@ -1,9 +1,9 @@
 object fmProduct: TfmProduct
   Left = 0
   Top = 0
-  Caption = #1052#1072#1090#1077#1088#1080#1072#1083#1099
+  Caption = #1058#1086#1074#1072#1088#1099
   ClientHeight = 201
-  ClientWidth = 447
+  ClientWidth = 560
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object fmProduct: TfmProduct
   object DBGrid1: TDBGrid
     Left = 0
     Top = 0
-    Width = 447
+    Width = 560
     Height = 201
     Align = alClient
     DataSource = DataSource1
@@ -46,7 +46,7 @@ object fmProduct: TfmProduct
     end
   end
   object DataSource1: TDataSource
-    Left = 408
-    Top = 8
+    Left = 16
+    Top = 160
   end
 end

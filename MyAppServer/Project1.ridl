@@ -6,7 +6,7 @@
 // However, when applying changes via the Editor this file will be regenerated
 // and comments or formatting changes will be lost.
 // ************************************************************************ //
-// File generated on 02.06.2019 13:16:00 (- $Rev: 12980 $, 494707562).
+// File generated on 08.06.2019 20:33:54 (- $Rev: 12980 $, 525549015).
 
 [
   uuid(73A6D16F-1746-4EB8-9F59-ABE91AC95A7D),
@@ -40,7 +40,7 @@ library Project1
     [id(0x00000130)]
     HRESULT _stdcall smDeleteProdut([in] long ID);
     [id(0x00000131)]
-    HRESULT _stdcall smUpdateFutura([in] long ID, [in] long ClientID, [in] double TotalSum);
+    HRESULT _stdcall smUpdateFutura([in] long ID, [in] long ClientID, [in] double TotalSum, [in] long OrderID);
     [id(0x00000132)]
     HRESULT _stdcall smDeleteFutura([in] long ID);
     [id(0x00000133)]
@@ -53,6 +53,16 @@ library Project1
     HRESULT _stdcall smSQLAddString([in] BSTR str);
     [id(0x00000137)]
     HRESULT _stdcall smSQLExecute(void);
+    [id(0x00000138)]
+    HRESULT _stdcall smUpdateOrders([in] long OrderID, [in] long ClientID, [in] BSTR PaymentType, [in] double Prepay, [in] double TotalSum, [in] BSTR Status, [in] DATE Date);
+    [id(0x00000139)]
+    HRESULT _stdcall smDeleteOrders([in] long OrderID);
+    [id(0x0000013A)]
+    HRESULT _stdcall smUpdateOrdersInfo([in] long OrderID, [in] long ProductID, [in] double Quantity, [in] double Price);
+    [id(0x0000013B)]
+    HRESULT _stdcall smDeleteOrdersInfo([in] long OrderID, [in] long ProductID);
+    [id(0x0000013C)]
+    HRESULT _stdcall smCreateFuturaInfo([in] long FuturaId, [in] long OrderID);
   };
 
   [

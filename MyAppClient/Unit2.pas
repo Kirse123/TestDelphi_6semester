@@ -26,17 +26,34 @@ type
     cdsFuturaTOTALSUM: TFloatField;
     cdsFuturaClientName: TStringField;
     cdsFuturaClientAdress: TStringField;
+    cdsOrders: TClientDataSet;
+    cdsOrdersInfo: TClientDataSet;
+    cdsOrdersORDERID: TIntegerField;
+    cdsOrdersCLIENTID: TIntegerField;
+    cdsOrdersPAYMENT_TYPE: TWideStringField;
+    cdsOrdersSTATUS: TWideStringField;
+    cdsOrdersPREPAY: TFloatField;
+    cdsOrdersSUMMA: TFloatField;
+    cdsOrdersInfoORDERID: TIntegerField;
+    cdsOrdersInfoPRODUCTID: TIntegerField;
+    cdsOrdersClientName: TStringField;
+    cdsOrdersInfoName: TStringField;
+    cdsOrdersInfoMg: TStringField;
+    cdsOrdersInfoSum: TFloatField;
+    cdsOrdersInfoPRICE: TFloatField;
+    cdsOrdersInfoQUANTITY: TFloatField;
     cdsFuturaInfoFUTURAID: TIntegerField;
     cdsFuturaInfoPRODUCTID: TIntegerField;
     cdsFuturaInfoQUANTITY: TFloatField;
     cdsFuturaInfoPRICE: TFloatField;
-    cdsFuturaInfoName: TStringField;
-    cdsFuturaInfoMg: TStringField;
-    cdsFuturaInfoSumma: TFloatField;
+    cdsFuturaORDERID: TIntegerField;
+    cdsOrdersDATE: TDateField;
     procedure DataModuleCreate(Sender: TObject);
     procedure DataModuleDestroy(Sender: TObject);
     procedure cdsFuturaCalcFields(DataSet: TDataSet);
     procedure cdsFuturaInfoCalcFields(DataSet: TDataSet);
+    procedure cdsOrdersCalcFields(DataSet: TDataSet);
+    procedure cdsOrdersInfoCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -66,7 +83,20 @@ end;
 
 procedure TdmMy.cdsFuturaInfoCalcFields(DataSet: TDataSet);
 begin
-  cdsFuturaInfoSumma.Value:=cdsFuturaInfoQUANTITY.Value * cdsFuturaInfoPRICE.Value;
+  //cdsFuturaInfoSumma.Value:=cdsFuturaInfoQUANTITY.Value * cdsFuturaInfoPRICE.Value;
+end;
+
+procedure TdmMy.cdsOrdersCalcFields(DataSet: TDataSet);
+begin
+  if cdsClient.Locate('ID', VarArrayOf([cdsOrdersClientID.Value]), []) then
+    begin
+      cdsOrdersClientName.Value := cdsClientNAME.Value;
+    end;
+end;
+
+procedure TdmMy.cdsOrdersInfoCalcFields(DataSet: TDataSet);
+begin
+ cdsOrdersInfoSum.Value := cdsOrdersInfoQUANTITY.Value * cdsOrdersInfoPRICE.Value;
 end;
 
 procedure TdmMy.DataModuleCreate(Sender: TObject);
@@ -75,15 +105,28 @@ begin
   cdsProduct.Open;
   cdsFutura.Open;
   cdsFuturaInfo.Open;
-  cdsFutura.AddIndex('indxID', 'ID', [], '', '');
-  cdsFutura.IndexFieldNames := 'ID';
-  cdsFuturaInfo.AddIndex('indxID', 'FuturaID;ProductID', [], '', '');
-  cdsFuturaInfo.IndexFieldNames := 'FuturaID;ProductID';
+  cdsOrders.Open;
+  cdsOrdersInfo.Open;
+  //индексы для накладной
+  cdsFutura.AddIndex('indxID', 'ORDERID', [], '', '');
+  cdsFutura.IndexFieldNames := 'ORDERID';
+  cdsOrdersInfo.AddIndex('indxID', 'OrderID;ProductID', [], '', '');
+  cdsOrdersInfo.IndexFieldNames := 'OrderID;ProductID';
+  //индексы для заказов
+  cdsOrders.AddIndex('order_indxID', 'ORDERID', [], '', '');
+  cdsOrders.IndexFieldNames := 'ORDERID';
+  cdsOrdersInfo.AddIndex('order_indxID', 'OrderID;ProductID', [], '', '');
+  cdsOrdersInfo.IndexFieldNames := 'OrderID;ProductID';
 end;
 
 procedure TdmMy.DataModuleDestroy(Sender: TObject);
 begin
   DCOMConnection1.Close;
+  //удаляем ненужные индексы
+  cdsOrders.DeleteIndex('order_indxID');
+  cdsOrdersInfo.DeleteIndex('order_indxID');
+  cdsFutura.DeleteIndex('indxID');
+  cdsOrdersInfo.DeleteIndex('indxID');
 end;
 
 end.

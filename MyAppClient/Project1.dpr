@@ -8,13 +8,20 @@ uses
   Unit4 in 'Unit4.pas' {fmNewProduct},
   Unit5 in 'Unit5.pas' {fsClients},
   Unit6 in 'Unit6.pas' {fmNewClient},
-  unitReports in 'unitReports.pas' {fmReport};
+  unitReports in 'unitReports.pas' {fmReport},
+  unitOrders in 'unitOrders.pas' {fmOrders},
+  unitOrderDetails in 'unitOrderDetails.pas' {fmOrderDetails},
+  unitClientChoose in 'unitClientChoose.pas' {fmClientChoose},
+  unitDiogram in 'unitDiogram.pas' {fmGraph},
+  Unit8 in 'Unit8.pas' {fmDatesGraphic},
+  unitCanvas in 'unitCanvas.pas' {fmCanvas};
 
 {$R *.res}
 
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfmOrders, fmOrders);
   Application.CreateForm(TfmMain, fmMain);
   Application.CreateForm(TdmMy, dmMy);
   Application.CreateForm(TfmProduct, fmProduct);
@@ -22,5 +29,10 @@ begin
   Application.CreateForm(TfsClients, fsClients);
   Application.CreateForm(TfmNewClient, fmNewClient);
   Application.CreateForm(TfmReport, fmReport);
+  Application.CreateForm(TfmOrderDetails, fmOrderDetails);
+  Application.CreateForm(TfmClientChoose, fmClientChoose);
+  Application.CreateForm(TfmGraph, fmGraph);
+  Application.CreateForm(TfmDatesGraphic, fmDatesGraphic);
+  Application.CreateForm(TfmCanvas, fmCanvas);
   Application.Run;
 end.

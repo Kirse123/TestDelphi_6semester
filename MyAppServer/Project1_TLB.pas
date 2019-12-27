@@ -12,7 +12,7 @@ unit Project1_TLB;
 // ************************************************************************ //
 
 // $Rev: 52393 $
-// File generated on 02.06.2019 12:23:11 from Type Library described below.
+// File generated on 07.06.2019 11:31:49 from Type Library described below.
 
 // ************************************************************************  //
 // Type Lib: E:\General\Документы\GitHub\Delphi\TestDelphi\MyAppServer\Project1 (1)
@@ -79,7 +79,7 @@ type
     procedure smDeleteClient(ID: Integer); safecall;
     procedure smUpdateProduct(ID: Integer; const NAME: WideString; const MG: WideString; VAT: Double); safecall;
     procedure smDeleteProdut(ID: Integer); safecall;
-    procedure smUpdateFutura(ID: Integer; ClientID: Integer; TotalSum: Double); safecall;
+    procedure smUpdateFutura(ID: Integer; ClientID: Integer; TotalSum: Double; OrderID: Integer); safecall;
     procedure smDeleteFutura(ID: Integer); safecall;
     procedure smUpdateFuturaInfo(FuturaID: Integer; ProductID: Integer; Quantity: Double;
                                  Price: Double); safecall;
@@ -87,6 +87,14 @@ type
     procedure smSQLClear; safecall;
     procedure smSQLAddString(const str: WideString); safecall;
     procedure smSQLExecute; safecall;
+    procedure smUpdateOrders(OrderID: Integer; ClientID: Integer; const PaymentType: WideString;
+                             Prepay: Double; TotalSum: Double; const Status: WideString;
+                             Date: TDateTime); safecall;
+    procedure smDeleteOrders(OrderID: Integer); safecall;
+    procedure smUpdateOrdersInfo(OrderID: Integer; ProductID: Integer; Quantity: Double;
+                                 Price: Double); safecall;
+    procedure smDeleteOrdersInfo(OrderID: Integer; ProductID: Integer); safecall;
+    procedure smCreateFuturaInfo(FuturaId: Integer; OrderID: Integer); safecall;
   end;
 
 // *********************************************************************//
@@ -100,7 +108,7 @@ type
     procedure smDeleteClient(ID: Integer); dispid 302;
     procedure smUpdateProduct(ID: Integer; const NAME: WideString; const MG: WideString; VAT: Double); dispid 303;
     procedure smDeleteProdut(ID: Integer); dispid 304;
-    procedure smUpdateFutura(ID: Integer; ClientID: Integer; TotalSum: Double); dispid 305;
+    procedure smUpdateFutura(ID: Integer; ClientID: Integer; TotalSum: Double; OrderID: Integer); dispid 305;
     procedure smDeleteFutura(ID: Integer); dispid 306;
     procedure smUpdateFuturaInfo(FuturaID: Integer; ProductID: Integer; Quantity: Double;
                                  Price: Double); dispid 307;
@@ -108,6 +116,14 @@ type
     procedure smSQLClear; dispid 309;
     procedure smSQLAddString(const str: WideString); dispid 310;
     procedure smSQLExecute; dispid 311;
+    procedure smUpdateOrders(OrderID: Integer; ClientID: Integer; const PaymentType: WideString;
+                             Prepay: Double; TotalSum: Double; const Status: WideString;
+                             Date: TDateTime); dispid 312;
+    procedure smDeleteOrders(OrderID: Integer); dispid 313;
+    procedure smUpdateOrdersInfo(OrderID: Integer; ProductID: Integer; Quantity: Double;
+                                 Price: Double); dispid 314;
+    procedure smDeleteOrdersInfo(OrderID: Integer; ProductID: Integer); dispid 315;
+    procedure smCreateFuturaInfo(FuturaId: Integer; OrderID: Integer); dispid 316;
     function AS_ApplyUpdates(const ProviderName: WideString; Delta: OleVariant; MaxErrors: SYSINT;
                              out ErrorCount: SYSINT; var OwnerData: OleVariant): OleVariant; dispid 20000000;
     function AS_GetRecords(const ProviderName: WideString; Count: SYSINT; out RecsOut: SYSINT;

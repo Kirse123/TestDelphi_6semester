@@ -33,6 +33,15 @@ type
     ibspDeleteFutura: TIBStoredProc;
     ibspUpdateFuturaInfo: TIBStoredProc;
     ibspDeleteFuturaInfo: TIBStoredProc;
+    ibtOrders: TIBTable;
+    ibtOrdersInfo: TIBTable;
+    dspOrders: TDataSetProvider;
+    dspOrdersInfo: TDataSetProvider;
+    ibspUpdateOrders: TIBStoredProc;
+    ibspDeleteOrders: TIBStoredProc;
+    ibspUpdateOrdersInfo: TIBStoredProc;
+    ibspDeleteOrdersInfo: TIBStoredProc;
+    ibspCreateFuturaInfo: TIBStoredProc;
   private
     { Private declarations }
   protected
@@ -42,7 +51,8 @@ type
     procedure smDeleteFutura(ID: Integer); safecall;
     procedure smDeleteFuturaInfo(FuturaID, ProductID: Integer); safecall;
     procedure smDeleteProduct(ID: Integer); safecall;
-    procedure smUpdateFutura(ID, ClientID: Integer; TotalSum: Double); safecall;
+    procedure smUpdateFutura(ID, ClientID: Integer; TotalSum: Double; OrderID: Integer);
+          safecall;
     procedure smUpdateFuturaInfo(FuturaID, ProductID: Integer; Quantity, Price: Double);
           safecall;
     procedure smUpdateProduct(ID: Integer; const NAME, MG: WideString; VAT: Double); safecall;
@@ -50,6 +60,14 @@ type
     procedure smSQLClear; safecall;
     procedure smSQLExecute; safecall;
     procedure smDeleteProdut(ID: Integer); safecall;
+    procedure smUpdateOrders(OrderID, ClientID: Integer; const PaymentType: WideString;
+          Prepay, TotalSum: Double; const Status: WideString;
+          Date: TDateTime); safecall;
+    procedure smDeleteOrders(OrderID: Integer); safecall;
+    procedure smDeleteOrdersInfo(OrderID, ProductID: Integer); safecall;
+    procedure smUpdateOrdersInfo(OrderID, ProductID: Integer; Quantity, Price: Double);
+          safecall;
+    procedure smCreateFuturaInfo(FuturaId, OrderID: Integer); safecall;
 
   public
     { Public declarations }
@@ -127,13 +145,15 @@ begin
     ibspDeleteProduct.Transaction.Commit;
 end;
 
-procedure TMyServer.smUpdateFutura(ID, ClientID: Integer; TotalSum: Double);
+procedure TMyServer.smUpdateFutura(ID, ClientID: Integer; TotalSum: Double; OrderID: Integer);
+
 begin
   if ibspUpdateFutura.Transaction.InTransaction then
     ibspUpdateFutura.Transaction.Commit;
   ibspUpdateFutura.Params[0].Value := ID;
   ibspUpdateFutura.Params[1].Value := ClientID;
   ibspUpdateFutura.Params[2].Value := TotalSum;
+  ibspUpdateFutura.Params[3].Value := OrderID;
   ibspUpdateFutura.ExecProc;
   if ibspUpdateFutura.Transaction.InTransaction then
     ibspUpdateFutura.Transaction.Commit;
@@ -191,6 +211,70 @@ end;
 procedure TMyServer.smDeleteProdut(ID: Integer);
 begin
 
+end;
+
+procedure TMyServer.smUpdateOrders(OrderID, ClientID: Integer; const PaymentType: WideString;
+          Prepay, TotalSum: Double; const Status: WideString;
+          Date: TDateTime);
+begin
+  if ibspUpdateOrders.Transaction.InTransaction then
+    ibspUpdateOrders.Transaction.Commit;
+  ibspUpdateOrders.Params[0].Value := OrderID;
+  ibspUpdateOrders.Params[1].Value := ClientID;
+  ibspUpdateOrders.Params[2].Value := PaymentType;
+  ibspUpdateOrders.Params[3].Value := Prepay;
+  ibspUpdateOrders.Params[4].Value := TotalSum;
+  ibspUpdateOrders.Params[5].Value := Status;
+  ibspUpdateOrders.Params[6].Value := Date;
+  ibspUpdateOrders.ExecProc;
+  if ibspUpdateOrders.Transaction.InTransaction then
+    ibspUpdateOrders.Transaction.Commit;
+end;
+
+procedure TMyServer.smDeleteOrders(OrderID: Integer);
+begin
+    if ibspDeleteOrders.Transaction.InTransaction then
+      ibspDeleteOrders.Transaction.Commit;
+    ibspDeleteOrders.Params[0].Value := OrderID;
+    ibspDeleteOrders.ExecProc;
+    if ibspDeleteOrders.Transaction.InTransaction then
+      ibspDeleteOrders.Transaction.Commit;
+end;
+
+procedure TMyServer.smDeleteOrdersInfo(OrderID, ProductID: Integer);
+begin
+  if ibspDeleteOrdersInfo.Transaction.InTransaction then
+    ibspDeleteOrdersInfo.Transaction.Commit;
+  ibspDeleteOrdersInfo.Params[0].Value := OrderID;
+  ibspDeleteOrdersInfo.Params[1].Value := ProductID;
+  ibspDeleteOrdersInfo.ExecProc;
+  if ibspDeleteOrdersInfo.Transaction.InTransaction then
+    ibspDeleteOrdersInfo.Transaction.Commit;
+end;
+
+procedure TMyServer.smUpdateOrdersInfo(OrderID, ProductID: Integer; Quantity, Price: Double);
+
+begin
+  if ibspUpdateOrdersInfo.Transaction.InTransaction then
+    ibspUpdateOrdersInfo.Transaction.Commit;
+  ibspUpdateOrdersInfo.Params[0].Value := OrderID;
+  ibspUpdateOrdersInfo.Params[1].Value := ProductID;
+  ibspUpdateOrdersInfo.Params[2].Value := Quantity;
+  ibspUpdateOrdersInfo.Params[3].Value := Price;
+  ibspUpdateOrdersInfo.ExecProc;
+  if ibspUpdateOrdersInfo.Transaction.InTransaction then
+    ibspUpdateOrdersInfo.Transaction.Commit
+end;
+
+procedure TMyServer.smCreateFuturaInfo(FuturaId, OrderID: Integer);
+begin
+  if ibspCreateFuturaInfo.Transaction.InTransaction then
+    ibspCreateFuturaInfo.Transaction.Commit;
+  ibspCreateFuturaInfo.Params[0].Value := FuturaId;
+  ibspCreateFuturaInfo.Params[1].Value := OrderId;
+  ibspCreateFuturaInfo.ExecProc;
+  if ibspCreateFuturaInfo.Transaction.InTransaction then
+    ibspCreateFuturaInfo.Transaction.Commit;
 end;
 
 initialization

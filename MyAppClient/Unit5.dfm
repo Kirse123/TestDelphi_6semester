@@ -3,7 +3,7 @@ object fsClients: TfsClients
   Top = 0
   Caption = #1050#1083#1080#1077#1085#1090#1099
   ClientHeight = 201
-  ClientWidth = 447
+  ClientWidth = 654
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object fsClients: TfsClients
   object DBGrid1: TDBGrid
     Left = 0
     Top = 0
-    Width = 447
+    Width = 654
     Height = 201
     Align = alClient
     DataSource = DataSource1
